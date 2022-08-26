@@ -1,13 +1,13 @@
 package model
 
-type particle interface {
+type Particle interface {
 	position()
 }
 
 type StaticParticle struct {
-	_position Point2D
+	position Point2D
 }
 
-func (p StaticParticle) position() Point2D {
-	return p._position
+func (p StaticParticle) Position() Point2D {
+	return p.position
 }
