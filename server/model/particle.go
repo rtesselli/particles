@@ -4,4 +4,6 @@ type Particle interface {
 	Position()
 	Size()
 	Velocity()
+	Energy()
+	Live()
 }
