@@ -1,6 +1,8 @@
 package model
 
-import "fmt"
+import (
+	"math/rand"
+)
 
 type StaticParticle struct {
 	position         Point2D
@@ -23,16 +25,11 @@ func (p StaticParticle) Energy() int {
 	return p.energy
 }
 
-func NewStaticParticle(initial_position Point2D, id, size, energy int) StaticParticle {
-	return StaticParticle{position: initial_position, id: id, size: size, energy: energy}
+func (p StaticParticle) ID() int {
+	return p.id
 }
 
-func (p StaticParticle) Live() {
-	age := 0
-	for p.energy >= 0 {
-		fmt.Printf("StaticParticle: ID %d, current age %d\n", p.id, age)
-		p.energy--
-		age++
-	}
-	fmt.Printf("ID %d dies\n", p.id)
+func NewStaticParticle(max_x, max_y, id, size, energy int) StaticParticle {
+	initial_position := Point2D{rand.Intn(max_x), rand.Intn(max_y)}
+	return StaticParticle{position: initial_position, id: id, size: size, energy: energy}
 }
