@@ -11,7 +11,9 @@ type Particle interface {
 	Position() Point2D
 	Velocity() Point2D
 	Size() int
-	Energy() int
+	MaxAge() int
+	Age() int
+	IncrementAge()
 	ID() int
 }
 
@@ -20,13 +22,10 @@ type LivingParticle struct {
 }
 
 func (l LivingParticle) Live(output_positions *common.SafeMap[int, Particle]) {
-	age := 0
-	energy := l.Energy()
-	for energy >= 0 {
-		fmt.Printf("Particle: ID %d, current age %d\n", l.ID(), age)
+	for l.Age() < l.MaxAge() {
+		fmt.Printf("Particle: ID %d, current age %d\n", l.ID(), l.Age())
 		output_positions.AddValue(l.ID(), l.Particle)
-		energy--
-		age++
+		l.IncrementAge()
 		time.Sleep(10 * time.Millisecond)
 	}
 	fmt.Printf("ID %d dies\n", l.ID())

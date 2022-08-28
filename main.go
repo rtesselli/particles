@@ -18,10 +18,12 @@ func main() {
 	environment.AddParticle(model.NewStaticParticle(10, 10, 3, 1, 300))
 	environment.Start(&positions)
 	for i := 0; i < 10; i++ {
-		fmt.Printf("Peek %d", i)
+		fmt.Printf("Peek %d\n", i)
 		time.Sleep(500 * time.Millisecond)
 		go func(p *common.SafeMap[int, model.Particle]) {
-			fmt.Print(p.GetMap())
+			for _, value := range p.GetMap() {
+				fmt.Printf("PEEK: ID: %d AGE: %d\n", value.ID(), value.Age())
+			}
 		}(&positions)
 	}
 	fmt.Println("Done main")

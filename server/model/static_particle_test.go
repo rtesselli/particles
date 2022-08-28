@@ -18,7 +18,7 @@ func TestStaticParticle(t *testing.T) {
 	if particle.size != 1 {
 		t.Errorf("Wrong size")
 	}
-	if particle.energy != 10 {
-		t.Errorf("Wrong energy")
+	if particle.max_age != 10 {
+		t.Errorf("Wrong max age")
 	}
 }
