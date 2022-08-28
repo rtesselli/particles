@@ -2,9 +2,15 @@ package model
 
 import (
 	"testing"
+
+	"github.com/rtesselli/particles/server/common"
 )
 
 func TestLive(t *testing.T) {
 	living := LivingParticle{NewStaticParticle(10, 10, 0, 1, 10)}
-	living.Live()
+	positions := common.NewSafeMap[int, Particle]()
+	living.Live(&positions)
+	if len(positions.GetMap()) != 1 {
+		t.Errorf("Wrong size")
+	}
 }

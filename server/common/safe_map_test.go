@@ -2,6 +2,13 @@ package common
 
 import "testing"
 
+func TestNewSafeMap(t *testing.T) {
+	safe_map := NewSafeMap[int, int]()
+	if len(safe_map.values) != 0 {
+		t.Errorf("Wrong size")
+	}
+}
+
 func TestAddValue(t *testing.T) {
 	safe_map := SafeMap[int, int]{values: make(map[int]int)}
 	safe_map.AddValue(1, 10)

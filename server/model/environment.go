@@ -1,6 +1,10 @@
 package model
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/rtesselli/particles/server/common"
+)
 
 type Environment struct {
 	particles     []*LivingParticle
@@ -19,11 +23,11 @@ func (e *Environment) Height() int {
 	return e.height
 }
 
-func (e *Environment) Start() {
+func (e *Environment) Start(output_positions *common.SafeMap[int, Particle]) {
 	fmt.Println("Starting environment")
 	for idx, particle := range e.particles {
 		fmt.Printf("Starting particle with id: %d\n", idx)
-		go particle.Live()
+		go particle.Live(output_positions)
 	}
 	fmt.Println("Done")
 }
