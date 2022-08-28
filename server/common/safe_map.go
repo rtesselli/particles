@@ -30,5 +30,7 @@ func (m *SafeMap[T, Y]) GetValue(key T) Y {
 }
 
 func (m *SafeMap[T, Y]) GetMap() map[T]Y {
+	m.mutex.Lock()
+	defer m.mutex.Unlock()
 	return m.values
 }
