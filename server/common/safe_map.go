@@ -34,3 +34,9 @@ func (m *SafeMap[T, Y]) GetMap() map[T]Y {
 	defer m.mutex.RUnlock()
 	return m.values
 }
+
+func (m *SafeMap[T, Y]) Reset() {
+	m.mutex.Lock()
+	m.values = make(map[T]Y)
+	m.mutex.Unlock()
+}

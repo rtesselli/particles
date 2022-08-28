@@ -34,3 +34,13 @@ func TestGetValue(t *testing.T) {
 		t.Errorf("Key error")
 	}
 }
+
+func TestReset(t *testing.T) {
+	safe_map := NewSafeMap[int, int]()
+	safe_map.AddValue(1, 1)
+	safe_map.AddValue(2, 2)
+	safe_map.Reset()
+	if len(safe_map.values) != 0 {
+		t.Errorf("Wrong size")
+	}
+}
