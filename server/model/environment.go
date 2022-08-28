@@ -11,6 +11,10 @@ type Environment struct {
 	width, height int
 }
 
+func NewEnvironment(width, height int) Environment {
+	return Environment{width: width, height: height}
+}
+
 func (e *Environment) AddParticle(particle Particle) {
 	e.particles = append(e.particles, &LivingParticle{particle})
 }
