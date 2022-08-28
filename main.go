@@ -11,12 +11,11 @@ import (
 func main() {
 	fmt.Println("Start main")
 	positions := common.NewSafeMap[int, model.Particle]()
-	environment := model.NewEnvironment(10, 10)
+	environment := model.NewEnvironment(10, 10, &positions)
 	environment.AddParticle(model.NewStaticParticle(10, 10, 0, 1, 400))
 	environment.AddParticle(model.NewStaticParticle(10, 10, 1, 1, 200))
 	environment.AddParticle(model.NewStaticParticle(10, 10, 2, 1, 100))
 	environment.AddParticle(model.NewStaticParticle(10, 10, 3, 1, 300))
-	environment.Start(&positions)
 	for i := 0; i < 10; i++ {
 		fmt.Printf("Peek %d\n", i)
 		time.Sleep(500 * time.Millisecond)
@@ -27,4 +26,10 @@ func main() {
 		}(&positions)
 	}
 	fmt.Println("Done main")
+
+	// positions := common.NewSafeMap[int, model.Particle]()
+	// view := view.NewView(320, 240, &positions)
+	// if err := ebiten.RunGame(view); err != nil {
+	// 	panic(err)
+	// }
 }
