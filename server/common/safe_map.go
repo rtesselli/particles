@@ -3,7 +3,7 @@ package common
 import "sync"
 
 type SafeMap[T comparable, Y any] struct {
-	mutex  sync.Mutex
+	mutex  sync.RWMutex
 	values map[T]Y
 }
 
@@ -24,13 +24,13 @@ func (m *SafeMap[T, Y]) RemoveValue(key T) {
 }
 
 func (m *SafeMap[T, Y]) GetValue(key T) Y {
-	m.mutex.Lock()
-	defer m.mutex.Unlock()
+	m.mutex.RLock()
+	defer m.mutex.RUnlock()
 	return m.values[key]
 }
 
 func (m *SafeMap[T, Y]) GetMap() map[T]Y {
-	m.mutex.Lock()
-	defer m.mutex.Unlock()
+	m.mutex.RLock()
+	defer m.mutex.RUnlock()
 	return m.values
 }
