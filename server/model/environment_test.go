@@ -8,7 +8,7 @@ import (
 )
 
 func TestStart(t *testing.T) {
-	positions := common.NewSafeMap[int, Particle]()
+	positions := common.NewSafeMap[int, common.ParticleData]()
 	environment := NewEnvironment(10, 10, &positions)
 	environment.AddParticle(NewStaticParticle(10, 10, 1, 1, 10))
 	environment.AddParticle(NewStaticParticle(10, 10, 2, 1, 20))

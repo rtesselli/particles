@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/rtesselli/particles/server/common"
-	"github.com/rtesselli/particles/server/model"
 	"github.com/rtesselli/particles/server/view"
 )
 
@@ -25,7 +24,7 @@ func main() {
 	// }
 	// fmt.Println("Done main")
 
-	positions := common.NewSafeMap[int, model.Particle]()
+	positions := common.NewSafeMap[int, common.ParticleData]()
 	view := view.NewView(320, 240, &positions)
 	view.Run()
 }

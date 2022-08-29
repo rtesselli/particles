@@ -2,19 +2,21 @@ package model
 
 import (
 	"math/rand"
+
+	"github.com/rtesselli/particles/server/common"
 )
 
 type StaticParticle struct {
-	position               Point2D
+	position               common.Point2D
 	id, size, max_age, age int
 }
 
-func (p *StaticParticle) Position() Point2D {
+func (p *StaticParticle) Position() common.Point2D {
 	return p.position
 }
 
-func (p *StaticParticle) Velocity() Point2D {
-	return Point2D{0, 0}
+func (p *StaticParticle) Velocity() common.Point2D {
+	return common.NewPoint2D(0, 0)
 }
 
 func (p *StaticParticle) Size() int {
@@ -38,6 +40,6 @@ func (p *StaticParticle) ID() int {
 }
 
 func NewStaticParticle(max_x, max_y, id, size, max_age int) *StaticParticle {
-	initial_position := Point2D{rand.Intn(max_x), rand.Intn(max_y)}
+	initial_position := common.NewPoint2D(rand.Intn(max_x), rand.Intn(max_y))
 	return &StaticParticle{position: initial_position, id: id, size: size, max_age: max_age, age: 0}
 }

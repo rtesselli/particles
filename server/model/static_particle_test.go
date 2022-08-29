@@ -6,10 +6,10 @@ import (
 
 func TestStaticParticle(t *testing.T) {
 	particle := NewStaticParticle(10, 10, 0, 1, 10)
-	if particle.position.x < 0 || particle.position.x >= 10 {
+	if particle.position.X() < 0 || particle.position.X() >= 10 {
 		t.Errorf("Wrong x")
 	}
-	if particle.position.y < 0 || particle.position.y >= 10 {
+	if particle.position.Y() < 0 || particle.position.Y() >= 10 {
 		t.Errorf("Wrong y")
 	}
 	if particle.id != 0 {

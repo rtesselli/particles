@@ -7,7 +7,6 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/rtesselli/particles/server/common"
-	"github.com/rtesselli/particles/server/model"
 
 	"golang.org/x/image/font"
 	"golang.org/x/image/font/opentype"
@@ -19,12 +18,12 @@ import (
 )
 
 type View struct {
-	positions     *common.SafeMap[int, model.Particle]
+	positions     *common.SafeMap[int, common.ParticleData]
 	width, height int
 	font          font.Face
 }
 
-func NewView(width, height int, positions *common.SafeMap[int, model.Particle]) *View {
+func NewView(width, height int, positions *common.SafeMap[int, common.ParticleData]) *View {
 	ebiten.SetWindowSize(640, 480)
 	ebiten.SetWindowTitle("Particles")
 	tt, _ := opentype.Parse(fonts.MPlus1pRegular_ttf)

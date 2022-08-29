@@ -5,11 +5,11 @@ import (
 )
 
 type Environment struct {
-	output_positions *common.SafeMap[int, Particle]
+	output_positions *common.SafeMap[int, common.ParticleData]
 	width, height    int
 }
 
-func NewEnvironment(width, height int, output_positions *common.SafeMap[int, Particle]) Environment {
+func NewEnvironment(width, height int, output_positions *common.SafeMap[int, common.ParticleData]) Environment {
 	return Environment{width: width, height: height, output_positions: output_positions}
 }
 

@@ -8,7 +8,7 @@ import (
 
 func TestLive(t *testing.T) {
 	living := LivingParticle{NewStaticParticle(10, 10, 0, 1, 10)}
-	positions := common.NewSafeMap[int, Particle]()
+	positions := common.NewSafeMap[int, common.ParticleData]()
 	living.Live(&positions)
 	if len(positions.GetMap()) != 0 {
 		t.Errorf("Wrong size")
