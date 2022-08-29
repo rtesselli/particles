@@ -10,7 +10,7 @@ func TestLive(t *testing.T) {
 	living := LivingParticle{NewStaticParticle(10, 10, 0, 1, 10)}
 	positions := common.NewSafeMap[int, Particle]()
 	living.Live(&positions)
-	if len(positions.GetMap()) != 1 {
+	if len(positions.GetMap()) != 0 {
 		t.Errorf("Wrong size")
 	}
 }

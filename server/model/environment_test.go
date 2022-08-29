@@ -14,7 +14,7 @@ func TestStart(t *testing.T) {
 	environment.AddParticle(NewStaticParticle(10, 10, 2, 1, 20))
 	environment.AddParticle(NewStaticParticle(10, 10, 3, 1, 30))
 	time.Sleep(2 * time.Second) // TODO find better way to wait for goros
-	if len(positions.GetMap()) != 3 {
+	if len(positions.GetMap()) != 0 {
 		t.Errorf("Wrong size")
 	}
 }

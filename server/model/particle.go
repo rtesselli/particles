@@ -29,4 +29,5 @@ func (l LivingParticle) Live(output_positions *common.SafeMap[int, Particle]) {
 		time.Sleep(10 * time.Millisecond)
 	}
 	fmt.Printf("ID %d dies\n", l.ID())
+	output_positions.RemoveValue(l.ID())
 }
