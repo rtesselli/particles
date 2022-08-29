@@ -7,7 +7,7 @@ import (
 
 func main() {
 	// fmt.Println("Start main")
-	// positions := common.NewSafeMap[int, model.Particle]()
+	// positions := common.NewSafeMap[int, common.ParticleData]()
 	// environment := model.NewEnvironment(10, 10, &positions)
 	// environment.AddParticle(model.NewStaticParticle(10, 10, 0, 1, 400))
 	// environment.AddParticle(model.NewStaticParticle(10, 10, 1, 1, 200))
@@ -16,9 +16,9 @@ func main() {
 	// for i := 0; i < 10; i++ {
 	// 	fmt.Printf("Peek %d\n", i)
 	// 	time.Sleep(500 * time.Millisecond)
-	// 	go func(p *common.SafeMap[int, model.Particle]) {
-	// 		for _, value := range p.GetMap() {
-	// 			fmt.Printf("PEEK: ID: %d AGE: %d\n", value.ID(), value.Age())
+	// 	go func(p *common.SafeMap[int, common.ParticleData]) {
+	// 		for id, value := range p.GetMap() {
+	// 			fmt.Printf("PEEK: ID: %d AGE: %d\n", id, value.Age)
 	// 		}
 	// 	}(&positions)
 	// }
