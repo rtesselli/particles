@@ -32,7 +32,11 @@ func (m *SafeMap[T, Y]) GetValue(key T) Y {
 func (m *SafeMap[T, Y]) GetMap() map[T]Y {
 	m.mutex.RLock()
 	defer m.mutex.RUnlock()
-	return m.values
+	newMap := make(map[T]Y)
+	for k, v := range m.values {
+		newMap[k] = v
+	}
+	return newMap
 }
 
 func (m *SafeMap[T, Y]) Reset() {

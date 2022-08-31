@@ -1,7 +1,6 @@
 package model
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/rtesselli/particles/server/common"
@@ -23,11 +22,9 @@ type LivingParticle struct {
 
 func (l LivingParticle) Live(output_positions *common.SafeMap[int, common.ParticleData]) {
 	for l.Age() < l.MaxAge() {
-		fmt.Printf("Particle: ID %d, current age %d\n", l.ID(), l.Age())
 		output_positions.AddValue(l.ID(), common.NewParticleData(l.Position(), l.Size(), l.Age(), l.MaxAge()))
 		l.IncrementAge()
 		time.Sleep(10 * time.Millisecond)
 	}
-	fmt.Printf("ID %d dies\n", l.ID())
 	output_positions.RemoveValue(l.ID())
 }
