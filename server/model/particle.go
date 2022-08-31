@@ -8,11 +8,10 @@ import (
 
 type Particle interface {
 	Position() common.Point2D
-	Velocity() common.Point2D
 	Size() int
 	MaxAge() int
 	Age() int
-	IncrementAge()
+	Update()
 }
 
 type LivingParticle struct {
@@ -27,7 +26,7 @@ func NewLivingParticle(id int, particle Particle) LivingParticle {
 func (l LivingParticle) Live(output_positions *common.SafeMap[int, common.ParticleData]) {
 	for l.particle.Age() < l.particle.MaxAge() {
 		output_positions.AddValue(l.id, common.NewParticleData(l.particle.Position(), l.particle.Size(), l.particle.Age(), l.particle.MaxAge()))
-		l.particle.IncrementAge()
+		l.particle.Update()
 		time.Sleep(10 * time.Millisecond)
 	}
 	output_positions.RemoveValue(l.id)

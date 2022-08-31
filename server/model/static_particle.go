@@ -15,10 +15,6 @@ func (p *StaticParticle) Position() common.Point2D {
 	return p.position
 }
 
-func (p *StaticParticle) Velocity() common.Point2D {
-	return common.NewPoint2D(0, 0)
-}
-
 func (p *StaticParticle) Size() int {
 	return p.size
 }
@@ -31,7 +27,7 @@ func (p *StaticParticle) Age() int {
 	return p.age
 }
 
-func (p *StaticParticle) IncrementAge() {
+func (p *StaticParticle) Update() {
 	p.age++
 }
 
