@@ -13,18 +13,22 @@ type Particle interface {
 	MaxAge() int
 	Age() int
 	IncrementAge()
-	ID() int
 }
 
 type LivingParticle struct {
-	Particle
+	particle Particle
+	id       int
+}
+
+func NewLivingParticle(id int, particle Particle) LivingParticle {
+	return LivingParticle{particle: particle, id: id}
 }
 
 func (l LivingParticle) Live(output_positions *common.SafeMap[int, common.ParticleData]) {
-	for l.Age() < l.MaxAge() {
-		output_positions.AddValue(l.ID(), common.NewParticleData(l.Position(), l.Size(), l.Age(), l.MaxAge()))
-		l.IncrementAge()
+	for l.particle.Age() < l.particle.MaxAge() {
+		output_positions.AddValue(l.id, common.NewParticleData(l.particle.Position(), l.particle.Size(), l.particle.Age(), l.particle.MaxAge()))
+		l.particle.IncrementAge()
 		time.Sleep(10 * time.Millisecond)
 	}
-	output_positions.RemoveValue(l.ID())
+	output_positions.RemoveValue(l.id)
 }

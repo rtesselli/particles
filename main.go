@@ -13,7 +13,7 @@ func main() {
 	view := view.NewView(width, height, &positions)
 	environment := model.NewEnvironment(width, height, &positions)
 	for i := 0; i < 1000; i++ {
-		environment.AddParticle(model.NewStaticParticle(width, height, i, 1, i*10))
+		environment.AddParticle(model.NewStaticParticle(width, height, 1, i*10))
 	}
 	view.Run()
 }

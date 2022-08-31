@@ -35,11 +35,7 @@ func (p *StaticParticle) IncrementAge() {
 	p.age++
 }
 
-func (p *StaticParticle) ID() int {
-	return p.id
-}
-
-func NewStaticParticle(max_x, max_y, id, size, max_age int) *StaticParticle {
+func NewStaticParticle(max_x, max_y, size, max_age int) *StaticParticle {
 	initial_position := common.NewPoint2D(rand.Intn(max_x), rand.Intn(max_y))
-	return &StaticParticle{position: initial_position, id: id, size: size, max_age: max_age, age: 0}
+	return &StaticParticle{position: initial_position, size: size, max_age: max_age, age: 0}
 }

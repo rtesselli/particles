@@ -5,7 +5,7 @@ import (
 )
 
 func TestStaticParticle(t *testing.T) {
-	particle := NewStaticParticle(10, 10, 0, 1, 10)
+	particle := NewStaticParticle(10, 10, 1, 10)
 	if particle.position.X() < 0 || particle.position.X() >= 10 {
 		t.Errorf("Wrong x")
 	}

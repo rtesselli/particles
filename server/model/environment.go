@@ -7,6 +7,7 @@ import (
 type Environment struct {
 	output_positions *common.SafeMap[int, common.ParticleData]
 	width, height    int
+	particle_count   int
 }
 
 func NewEnvironment(width, height int, output_positions *common.SafeMap[int, common.ParticleData]) Environment {
@@ -14,7 +15,8 @@ func NewEnvironment(width, height int, output_positions *common.SafeMap[int, com
 }
 
 func (e *Environment) AddParticle(particle Particle) {
-	go LivingParticle{particle}.Live(e.output_positions)
+	go NewLivingParticle(e.particle_count, particle).Live(e.output_positions)
+	e.particle_count++
 }
 
 func (e *Environment) Width() int {
