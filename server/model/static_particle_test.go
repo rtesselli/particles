@@ -12,9 +12,6 @@ func TestStaticParticle(t *testing.T) {
 	if particle.position.Y() < 0 || particle.position.Y() >= 10 {
 		t.Errorf("Wrong y")
 	}
-	if particle.id != 0 {
-		t.Errorf("Wrong ID")
-	}
 	if particle.size != 1 {
 		t.Errorf("Wrong size")
 	}

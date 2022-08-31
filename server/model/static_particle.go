@@ -7,8 +7,8 @@ import (
 )
 
 type StaticParticle struct {
-	position               common.Point2D
-	id, size, max_age, age int
+	position           common.Point2D
+	size, max_age, age int
 }
 
 func (p *StaticParticle) Position() common.Point2D {
