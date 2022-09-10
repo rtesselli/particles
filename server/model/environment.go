@@ -6,8 +6,8 @@ import (
 
 type Environment struct {
 	output_positions *common.SafeMap[int, common.ParticleData]
+	particles        []LivingParticle
 	width, height    int
-	particle_count   int
 }
 
 func NewEnvironment(width, height int, output_positions *common.SafeMap[int, common.ParticleData]) Environment {
@@ -15,8 +15,9 @@ func NewEnvironment(width, height int, output_positions *common.SafeMap[int, com
 }
 
 func (e *Environment) AddParticle(particle Particle) {
-	go NewLivingParticle(e.particle_count, particle).Live(e.output_positions)
-	e.particle_count++
+	living_particle := NewLivingParticle(len(e.particles), particle)
+	e.particles = append(e.particles, living_particle)
+	go living_particle.Live(e.output_positions)
 }
 
 func (e *Environment) Width() int {
@@ -25,4 +26,10 @@ func (e *Environment) Width() int {
 
 func (e *Environment) Height() int {
 	return e.height
+}
+
+func (e *Environment) Tick() {
+	for _, particle := range e.particles {
+		particle.tick <- true
+	}
 }
