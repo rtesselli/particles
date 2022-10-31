@@ -21,7 +21,8 @@ func main() {
 	environment := model.NewEnvironment(width, height)
 	controller := controller.NewController(environment, view)
 	for i := 0; i < 1000; i++ {
-		controller.AddParticle(model.NewLinearParticle(width, height, 1, i*5, common.NewPoint2D(randInRange(-2, 2), randInRange(-2, 2))))
+		controller.AddParticle(model.NewLinearParticle(width, height, 1, i, common.NewPoint2D(randInRange(-2, 2), randInRange(-2, 2))))
+		//controller.AddParticle(model.NewStaticParticle(width, height, 1, 300))
 	}
 	controller.Run()
 }

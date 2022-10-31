@@ -26,6 +26,16 @@ func (c *Controller) AddParticle(particle model.Particle) {
 	c.model.AddParticle(particle)
 }
 
+func (c *Controller) Listen() {
+	for {
+		if v := <-c.view.Tick; v {
+			c.Tick()
+			c.view.Tick <- true
+		}
+	}
+}
+
 func (c *Controller) Run() {
+	go c.Listen()
 	c.view.Run()
 }

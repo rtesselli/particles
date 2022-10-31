@@ -19,6 +19,7 @@ type View struct {
 	width, height int
 	font          font.Face
 	redCircle     *ebiten.Image
+	Tick          chan bool
 }
 
 func NewView(width, height int) *View {
@@ -30,7 +31,7 @@ func NewView(width, height int) *View {
 		DPI:     72,
 		Hinting: font.HintingFull,
 	})
-	return &View{width: width, height: height, font: font, redCircle: CircleImage(2, 1, 0, 0, 1)}
+	return &View{width: width, height: height, font: font, redCircle: CircleImage(2, 1, 0, 0, 1), Tick: make(chan bool)}
 }
 
 func (v *View) SetPositions(positions *common.SafeMap[int, common.ParticleData]) {
@@ -38,6 +39,8 @@ func (v *View) SetPositions(positions *common.SafeMap[int, common.ParticleData])
 }
 
 func (v *View) Update() error {
+	v.Tick <- true
+	<-v.Tick
 	return nil
 }
 
@@ -48,6 +51,7 @@ func (v *View) Draw(screen *ebiten.Image) {
 	for _, position := range positions {
 		v.DrawCircle(screen, position.Position)
 	}
+	v.positions.Reset()
 }
 
 func (v *View) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
