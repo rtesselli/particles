@@ -41,13 +41,13 @@ func (e *Environment) Tick() {
 		go particle.Tick(&e.waitingGroup, e.outputPositions)
 	}
 	e.waitingGroup.Wait()
-	to_remove := make([]int, 0, e.particles.Size())
+	toRemove := make([]int, 0, e.particles.Size())
 	for _, particle := range e.particles.GetMap() {
 		if !particle.Alive() {
-			to_remove = append(to_remove, particle.id)
+			toRemove = append(toRemove, particle.id)
 		}
 	}
-	for _, id := range to_remove {
+	for _, id := range toRemove {
 		e.particles.RemoveValue(id)
 	}
 }
