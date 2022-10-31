@@ -1,21 +1,25 @@
 package model
 
 import (
+	"sync"
 	"testing"
-	"time"
 
 	"github.com/rtesselli/particles/server/common"
 )
 
-func TestLive(t *testing.T) {
+func TestParticleTick(t *testing.T) {
 	living := NewLivingParticle(0, NewStaticParticle(10, 10, 1, 10))
 	positions := common.NewSafeMap[int, common.ParticleData]()
-	go living.Live(&positions)
+	wg := sync.WaitGroup{}
 	for i := 0; i < 10; i++ {
-		living.tick <- true
-		time.Sleep(time.Millisecond)
+		wg.Add(1)
+		go living.Tick(&wg, &positions)
 	}
-	if len(positions.GetMap()) != 0 {
+	wg.Wait()
+	if len(positions.GetMap()) != 1 {
 		t.Errorf("Wrong size")
+	}
+	if living.Alive() {
+		t.Errorf("Not dead")
 	}
 }

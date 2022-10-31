@@ -18,4 +18,7 @@ func TestStaticParticle(t *testing.T) {
 	if particle.max_age != 10 {
 		t.Errorf("Wrong max age")
 	}
+	if !particle.Alive() {
+		t.Errorf("Not alive")
+	}
 }

@@ -1,6 +1,8 @@
 package model
 
 import (
+	"sync"
+
 	"github.com/rtesselli/particles/server/common"
 )
 
@@ -10,23 +12,23 @@ type Particle interface {
 	MaxAge() int
 	Age() int
 	Update()
+	Alive() bool
 }
 
 type LivingParticle struct {
 	Particle
-	tick chan bool
-	id   int
+	id int
 }
 
 func NewLivingParticle(id int, particle Particle) LivingParticle {
-	return LivingParticle{particle, make(chan bool), id}
+	return LivingParticle{particle, id}
 }
 
-func (l LivingParticle) Live(output_positions *common.SafeMap[int, common.ParticleData]) {
-	for l.Age() < l.MaxAge() {
-		output_positions.AddValue(l.id, common.NewParticleData(l.Position(), l.Size(), l.Age(), l.MaxAge()))
+func (l LivingParticle) Tick(waitingGroup *sync.WaitGroup, outputPositions *common.SafeMap[int, common.ParticleData]) {
+	defer waitingGroup.Done()
+	if l.Alive() {
+		outputPositions.AddValue(l.id, *common.NewParticleData(l.Position(), l.Size(), l.Age(), l.MaxAge()))
 		l.Update()
-		<-l.tick
+		return
 	}
-	output_positions.RemoveValue(l.id)
 }

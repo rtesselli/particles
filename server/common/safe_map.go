@@ -44,3 +44,9 @@ func (m *SafeMap[T, Y]) Reset() {
 	m.values = make(map[T]Y)
 	m.mutex.Unlock()
 }
+
+func (m *SafeMap[T, Y]) Size() int {
+	m.mutex.RLock()
+	defer m.mutex.RUnlock()
+	return len(m.values)
+}

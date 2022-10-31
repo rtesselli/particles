@@ -27,6 +27,10 @@ func (p *LinearParticle) Age() int {
 	return p.age
 }
 
+func (p *LinearParticle) Alive() bool {
+	return p.age < p.max_age
+}
+
 func (p *LinearParticle) Update() {
 	p.age++
 	p.position = p.position.Add(p.velocity)

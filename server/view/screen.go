@@ -21,7 +21,7 @@ type View struct {
 	redCircle     *ebiten.Image
 }
 
-func NewView(width, height int, positions *common.SafeMap[int, common.ParticleData]) *View {
+func NewView(width, height int) *View {
 	ebiten.SetWindowSize(width, height)
 	ebiten.SetWindowTitle("Particles")
 	tt, _ := opentype.Parse(fonts.MPlus1pRegular_ttf)
@@ -30,7 +30,11 @@ func NewView(width, height int, positions *common.SafeMap[int, common.ParticleDa
 		DPI:     72,
 		Hinting: font.HintingFull,
 	})
-	return &View{width: width, height: height, positions: positions, font: font, redCircle: CircleImage(2, 1, 0, 0, 1)}
+	return &View{width: width, height: height, font: font, redCircle: CircleImage(2, 1, 0, 0, 1)}
+}
+
+func (v *View) SetPositions(positions *common.SafeMap[int, common.ParticleData]) {
+	v.positions = positions
 }
 
 func (v *View) Update() error {

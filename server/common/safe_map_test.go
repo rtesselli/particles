@@ -44,3 +44,12 @@ func TestReset(t *testing.T) {
 		t.Errorf("Wrong size")
 	}
 }
+
+func TestSize(t *testing.T) {
+	safe_map := NewSafeMap[int, int]()
+	safe_map.AddValue(1, 1)
+	safe_map.AddValue(2, 2)
+	if safe_map.Size() != 2 {
+		t.Errorf("Wrong size")
+	}
+}

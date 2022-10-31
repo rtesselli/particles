@@ -31,6 +31,10 @@ func (p *StaticParticle) Update() {
 	p.age++
 }
 
+func (p *StaticParticle) Alive() bool {
+	return p.age < p.max_age
+}
+
 func NewStaticParticle(max_x, max_y, size, max_age int) *StaticParticle {
 	initial_position := common.NewPoint2D(rand.Intn(max_x), rand.Intn(max_y))
 	return &StaticParticle{position: initial_position, size: size, max_age: max_age, age: 0}
