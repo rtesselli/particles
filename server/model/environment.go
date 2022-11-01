@@ -49,5 +49,6 @@ func (e *Environment) Tick() {
 	}
 	for _, id := range toRemove {
 		e.particles.RemoveValue(id)
+		e.outputPositions.RemoveValue(id)
 	}
 }

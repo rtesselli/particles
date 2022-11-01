@@ -18,7 +18,7 @@ func TestEnvironmentTick(t *testing.T) {
 		fmt.Printf("Tick number %d\n", i)
 		environment.Tick()
 	}
-	if v := positions.Size(); v != 3 {
+	if v := positions.Size(); v != 0 {
 		t.Errorf("Wrong size %d", v)
 	}
 }

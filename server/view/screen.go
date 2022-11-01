@@ -51,7 +51,6 @@ func (v *View) Draw(screen *ebiten.Image) {
 	for _, position := range positions {
 		v.DrawCircle(screen, position.Position)
 	}
-	v.positions.Reset()
 }
 
 func (v *View) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
